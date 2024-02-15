@@ -1,0 +1,19 @@
+{
+  "name": "oom-parking-system",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/erocrizs/oom-parking-system.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/erocrizs/oom-parking-system/issues"
+  },
+  "homepage": "https://github.com/erocrizs/oom-parking-system#readme"
+}
