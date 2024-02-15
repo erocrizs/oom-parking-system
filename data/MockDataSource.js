@@ -2,8 +2,50 @@ const _ = require('lodash');
 const { DataSource, DataModel } = require('../library/DataSource');
 
 const data = {
-    SlotEntranceDistances: [],
-    SlotSizes: [],
+    SlotEntranceDistances: [
+        [ 11, 19, 10 ],
+        [ 14, 11, 16 ],
+        [ 15, 6, 3 ],
+        [ 4, 18, 15 ],
+        [ 5, 13, 19 ],
+        [ 7, 1, 5 ],
+        [ 19, 1, 17 ],
+        [ 10, 20, 8 ],
+        [ 2, 9, 14 ],
+        [ 8, 9, 10 ],
+        [ 5, 6, 19 ],
+        [ 8, 8, 5 ],
+        [ 5, 9, 20 ],
+        [ 13, 18, 10 ],
+        [ 20, 17, 6 ],
+        [ 12, 13, 16 ],
+        [ 4, 17, 17 ],
+        [ 17, 4, 8 ],
+        [ 10, 10, 17 ],
+        [ 16, 18, 7 ]
+    ],
+    SlotSizes: [
+        1,
+        1,
+        0,
+        0,
+        1,
+        2,
+        1,
+        0,
+        2,
+        1,
+        0,
+        0,
+        0,
+        1,
+        0,
+        2,
+        0,
+        1,
+        2,
+        0
+    ],
     Vehicles: [],
     Transactions: [],
 };
@@ -63,6 +105,9 @@ class MockDataModel extends DataModel {
 
 class MockDataSource extends DataSource {
     getModel(tableName) {
+        if (!_.has(data, tableName)) {
+            throw new Error('Table not found');
+        }
         return new MockDataModel(tableName);
     }
 }
