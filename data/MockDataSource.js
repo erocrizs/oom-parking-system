@@ -76,16 +76,13 @@ class MockDataModel extends DataModel {
     update(data, filter) {
         const affectedData = _.map(
             this.get(filter),
-            ({id, data: originalData}) => ({
-                id,
-                data: _.assign({}, originalData, data)
-            })
+            ({id}) => ({id, data})
         );
         _.forEach(({id, data}) => _.set(this.#table, id, data));
         return affectedData;
     }
     updateById(data, id) {
-        if (!_.has(this.#table, id)) {
+        if (_.isNil(this.#table[id])) {
             throw new Error('ID not found');
         }
         _.set(this.#table, id, data);
