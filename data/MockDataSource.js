@@ -50,6 +50,20 @@ const data = {
     Transactions: [],
 };
 
+/**
+ * Vehicles: {
+ *  plateNumber: '', //string
+ *  size: 1, // 0, 1, 2 for small, medium, and large respectively
+ * }
+ * Transactions: {
+ *  vehicleId: 12, // int index for vehicle
+ *  slot: 15, // int index for slot
+ *  startTime: new Date('2024-02-15T05:05:37.081Z'), // date object
+ *  endTime: null, // date object or null
+ *  parentTransaction: 12 // int index for transaction this one continues or null
+ * }
+ */
+
 class MockDataModel extends DataModel {
     #table = [];
     constructor(tableName) {
