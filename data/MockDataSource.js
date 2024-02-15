@@ -46,6 +46,20 @@ const data = {
         2,
         0
     ],
+    SlotSizePricings: [
+        {
+            description: 'small',
+            hourlyRate: 20,
+        },
+        {
+            description: 'medium',
+            hourlyRate: 60,
+        },
+        {
+            description: 'large',
+            hourlyRate: 100,
+        },
+    ],
     Vehicles: [],
     Transactions: [],
 };
