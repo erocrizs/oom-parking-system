@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/erocrizs/oom-parking-system#readme",
   "dependencies": {
-    "lodash": "^4.17.21"
+    "lodash": "^4.17.21",
+    "moment": "^2.30.1"
   }
 }

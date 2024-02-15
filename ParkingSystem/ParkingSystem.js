@@ -1,3 +1,9 @@
+const _ = require('lodash');
+const moment = require('moment');
+
+const hourInMs = 1000 * 60 * 60;
+const dayInMs = 24 * hourInMs;
+
 class ParkingSystem {
     #slotEntranceDistancesModel = null;
     #slotSizesModel = null;
@@ -61,14 +67,14 @@ class ParkingSystem {
         }
 
         const transactionChain = this.#getRecentTransactionChain(id);
-        const { paidAmount, totalCost } = this.#calculateCost(transactionChain);
-        const [latestTransaction] = transactionChain;
-        this.#recordVehicleUnparking(latestTransaction.id, unparkTime);
+        const lastTransaction = _.first(transactionChain);
+        this.#recordVehicleUnparking(lastTransaction.id, unparkTime);
+        const { paidAmount, totalCost } = this.#calculateCost(transactionChain, unparkTime);
 
         return {
-            transactionId: latestTransaction.id,
-            slotId: latestTransaction.data.slot,
-            parkTime: latestTransaction.data.startTime,
+            transactionId: lastTransaction.id,
+            slotId: lastTransaction.data.slot,
+            parkTime: lastTransaction.data.startTime,
             endTime: unparkTime,
             totalCost,
             paidAmount,
@@ -80,8 +86,33 @@ class ParkingSystem {
         // TODO
     }
 
-    #calculateCost(transactionChain) {
-        // TODO
+    #calculateCost(transactionChain, unparkTime) {
+        let totalCost = 0;
+        const firstTransaction = _.last(transactionChain);
+        const lastTransaction = _.first(transactionChain);
+        let coveredDurationMs = 0;
+        const startTimeMoment = moment(firstTransaction.data.startTime);
+        const totalDurationMs = moment(unparkTime).diff(startTimeMoment);
+
+        while (totalDurationMs - coveredDurationMs >= dayInMs) {
+            totalCost += this.fullDayCharge;
+            coveredDurationMs += dayInMs;
+        }
+
+        if (coveredDurationMs === 0) {
+            coveredDurationMs = this.flatRateHours * hourInMs;
+            totalCost = this.flatRateCharge;
+        }
+
+        for (let i = transactionChain.length - 1; i >= 0; i--) {
+            const transaction = transactionChain[i];
+            const transactionEndTime = transaction.data.endTime ?? unparkTime;
+            const hoursSoFar = moment(transactionEndTime).diff(startTimeMoment);
+            
+            if () {
+                
+            }
+        }
     }
 
     #recordVehicleUnparking(transactionId, unparkTime) {
