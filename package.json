@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "start": "node index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -15,5 +16,8 @@
   "bugs": {
     "url": "https://github.com/erocrizs/oom-parking-system/issues"
   },
-  "homepage": "https://github.com/erocrizs/oom-parking-system#readme"
+  "homepage": "https://github.com/erocrizs/oom-parking-system#readme",
+  "dependencies": {
+    "lodash": "^4.17.21"
+  }
 }
